@@ -37,8 +37,8 @@ jobs:
       - name: build image
         run: make docker-build
 
-      - name: build publish
-        run: make docker-build
+      - name: docker push
+        run: make docker-push
   test:
     runs-on: ubuntu-20.04
     steps:
