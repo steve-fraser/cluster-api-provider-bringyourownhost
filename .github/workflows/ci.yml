@@ -34,7 +34,11 @@ jobs:
 
       - name: build agent
         run: make host-agent-binaries
+      - name: build image
+        run: make docker-build
 
+      - name: build publish
+        run: make docker-build
   test:
     runs-on: ubuntu-20.04
     steps:
