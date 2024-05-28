@@ -2,7 +2,7 @@
 SHELL:=/usr/bin/env bash
 
 # Define registries
-STAGING_REGISTRY ?= gcr.io/steve-fraser
+STAGING_REGISTRY ?= ghcr.io/steve-fraser
 
 IMAGE_NAME ?= cluster-api-byoh-controller
 TAG ?= dev
