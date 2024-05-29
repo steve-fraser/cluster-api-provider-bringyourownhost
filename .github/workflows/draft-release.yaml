@@ -27,9 +27,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Build Release Artifacts
-        run: IMG="ghcr.io/steve-fraser/cluster-api-byoh-controller:${{ github.ref_name }}" make build-release-artifacts docker-build
+        run: IMG="ghcr.io/steve-fraser/cluster-api-byoh-controller:${{ github.ref_name }}" make build-release-artifacts docker-build docker-push
 
       - name: Publish Release
         uses: softprops/action-gh-release@v1
