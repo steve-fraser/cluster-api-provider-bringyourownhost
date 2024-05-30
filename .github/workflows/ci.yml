@@ -49,7 +49,7 @@ jobs:
       - name: build and push bundle
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: make bundle-builder-publish
+        run: GITHUB_TOKEN=$GITHUB_TOKEN make bundle-builder-publish
   test:
     runs-on: ubuntu-20.04
     steps:
