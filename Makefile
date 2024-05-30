@@ -28,6 +28,9 @@ GINKGO_NOCOLOR ?= false
 TOOLS_DIR := $(REPO_ROOT)/hack/tools
 BIN_DIR := bin
 TOOLS_BIN_DIR := $(TOOLS_DIR)/$(BIN_DIR)
+
+BUNDLER_DIR=$(REPO_ROOT)/installer/bundle_builder
+
 GINKGO := $(TOOLS_BIN_DIR)/ginkgo
 GINKGO_PKG := github.com/onsi/ginkgo/v2/ginkgo
 
@@ -257,6 +260,13 @@ build-metadata-yaml:
 
 build-host-agent-binary: host-agent-binaries
 	cp bin/byoh-hostagent-linux-amd64 $(RELEASE_DIR)/byoh-hostagent-linux-amd64
+
+
+bundle-builder:
+	cd ${BUNDLER_DIR}/ingredients/deb; docker build -t download .
+	docker run --rm -v /tmp/ingredients:/ingredients download
+	cd ${BUNDLER_DIR}; docker build -t build .
+	docker run --rm -v /tmp/ingredients:/ingredients --env BUILD_ONLY=1 build ${STAGING_REGISTRY}/${IMAGE_NAME}/byoh-bundle-ubuntu_20.04.1_x86-64_k8s:test
 
 
 # go-get-tool will 'go get' any package $2 and install it to $1.
