@@ -1,6 +1,9 @@
 # Ensure Make is run with bash shell as some syntax below is bash-specific
 SHELL:=/usr/bin/env bash
 
+
+RELEASE_VERSIONS?=1.27.14-1.1
+
 # Define registries
 STAGING_REGISTRY ?= ghcr.io/steve-fraser
 
@@ -261,12 +264,14 @@ build-metadata-yaml:
 build-host-agent-binary: host-agent-binaries
 	cp bin/byoh-hostagent-linux-amd64 $(RELEASE_DIR)/byoh-hostagent-linux-amd64
 
-
-bundle-builder-publish:
+bundle-builder-publish: $(addprefix bundle-builder-publish-,$(RELEASE_VERSIONS))
+bundle-builder-publish-%:
 	cd ${BUNDLER_DIR}/ingredients/deb; docker build -t download .
-	docker run --rm -v /tmp/ingredients:/ingredients download
+	docker run --rm --env KUBERNETES_VERSION=$* -v /tmp/ingredients:/ingredients download
 	cd ${BUNDLER_DIR}; docker build -t build .
-	docker run --rm -v /tmp/ingredients:/ingredients --env BUILD_ONLY=0 --env IMGPKG_ACTIVE_KEYCHAINS=github --env GITHUB_TOKEN=${GITHUB_TOKEN} build ${STAGING_REGISTRY}/${IMAGE_NAME}/byoh-bundle-ubuntu_20.04.1_x86-64_k8s:test
+	docker run --rm -v /tmp/ingredients:/ingredients --env BUILD_ONLY=0 --env IMGPKG_ACTIVE_KEYCHAINS=github --env GITHUB_TOKEN=${GITHUB_TOKEN} build ${STAGING_REGISTRY}/${IMAGE_NAME}/byoh-bundle-ubuntu_20.04.1_x86-64_k8s:$*
+
+
 
 
 # go-get-tool will 'go get' any package $2 and install it to $1.
