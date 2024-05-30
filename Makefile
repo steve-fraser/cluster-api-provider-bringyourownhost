@@ -262,11 +262,11 @@ build-host-agent-binary: host-agent-binaries
 	cp bin/byoh-hostagent-linux-amd64 $(RELEASE_DIR)/byoh-hostagent-linux-amd64
 
 
-bundle-builder:
+bundle-builder-publish:
 	cd ${BUNDLER_DIR}/ingredients/deb; docker build -t download .
 	docker run --rm -v /tmp/ingredients:/ingredients download
 	cd ${BUNDLER_DIR}; docker build -t build .
-	docker run --rm -v /tmp/ingredients:/ingredients --env BUILD_ONLY=1 build ${STAGING_REGISTRY}/${IMAGE_NAME}/byoh-bundle-ubuntu_20.04.1_x86-64_k8s:test
+	docker run --rm -v /tmp/ingredients:/ingredients --env BUILD_ONLY=0 --env IMGPKG_ACTIVE_KEYCHAINS=github --env GITHUB_TOKEN=${GITHUB_TOKEN} build ${STAGING_REGISTRY}/${IMAGE_NAME}/byoh-bundle-ubuntu_20.04.1_x86-64_k8s:test
 
 
 # go-get-tool will 'go get' any package $2 and install it to $1.

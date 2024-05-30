@@ -12,15 +12,15 @@ on:
       - 'NOTICE'
       - 'PROJECT'
       - 'SECURITY_CONTACTS'
-  pull_request:
-    branches: [ main ]
-    paths-ignore:
-      - '*.md'
-      - 'docs/**'
-      - 'LICENSE'
-      - 'NOTICE'
-      - 'PROJECT'
-      - 'SECURITY_CONTACTS'
+  # pull_request:
+  #   branches: [ main ]
+  #   paths-ignore:
+  #     - '*.md'
+  #     - 'docs/**'
+  #     - 'LICENSE'
+  #     - 'NOTICE'
+  #     - 'PROJECT'
+  #     - 'SECURITY_CONTACTS'
 
 jobs:
   build-agent:
@@ -43,9 +43,13 @@ jobs:
         run: make host-agent-binaries
       - name: build image
         run: make docker-build
-
       - name: docker push
         run: make docker-push
+
+      - name: build and push bundle
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: make bundle-builder-publish
   test:
     runs-on: ubuntu-20.04
     steps:
