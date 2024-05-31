@@ -1,5 +1,7 @@
 name: e2e-suite
 
+permissions: read-all
+
 on:
   pull_request:
     branches: [ main ]
