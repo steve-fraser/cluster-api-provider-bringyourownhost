@@ -246,6 +246,12 @@ Note: It may happen that a specific patch version of a k8s minor release is not 
         <td>v1.26.*</td>
         <td>byoh-bundle-ubuntu_20.04.1_x86-64_k8s:v1.26.*</td>
     </tr>
+    </tr>
+        <tr>
+        <td>Ubuntu_20.04.*_x86-64</td>
+        <td>v1.27.*</td>
+        <td>byoh-bundle-ubuntu_20.04.1_x86-64_k8s:v1.27.*</td>
+    </tr>
 </table>
 The '*' in OS means that all Ubuntu 20.04 patches will be handled by this BYOH bundle.
 
