@@ -269,7 +269,7 @@ bundle-builder-publish-%:
 	cd ${BUNDLER_DIR}/ingredients/deb; docker build -t download .
 	docker run --rm --env KUBERNETES_VERSION=$* -v /tmp/ingredients:/ingredients download
 	cd ${BUNDLER_DIR}; docker build -t build .
-	docker run --rm -v /tmp/ingredients:/ingredients --env BUILD_ONLY=0 --env IMGPKG_ACTIVE_KEYCHAINS=github --env-file <(env | grep GITHUB) build ${STAGING_REGISTRY}/${IMAGE_NAME}/byoh-bundle-ubuntu_20.04.1_x86-64_k8s:$*
+	docker run --rm -v /tmp/ingredients:/ingredients --env BUILD_ONLY=0 --env IMGPKG_ACTIVE_KEYCHAINS=github --env GITHUB_TOKEN=${GITHUB_TOKEN} build ${STAGING_REGISTRY}/${IMAGE_NAME}/byoh-bundle-ubuntu_20.04.1_x86-64_k8s:$*
 
 
 
