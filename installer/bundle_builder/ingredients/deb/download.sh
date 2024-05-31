@@ -12,12 +12,15 @@ sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 echo Download containerd
 curl -LOJR https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/cri-containerd-cni-${CONTAINERD_VERSION}-linux-amd64.tar.gz
 
+K8S_MAJOR=$(echo "$KUBERNETES_VERSION" | cut -d '.' -f 1,2)
+echo k8s major detected: $K8S_MAJOR
+
 echo Download the k8s public signing key
 sudo mkdir -p -m 755 /etc/apt/keyrings
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.27/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v$K8S_MAJOR/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
 echo Add the Kubernetes apt repository
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v$K8S_MAJOR/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 echo Update apt package index, install kubelet, kubeadm and kubectl
 sudo apt-get update
