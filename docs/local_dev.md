@@ -58,7 +58,7 @@ Next, create a tilt-settings.json file and place it in your local copy of cluste
 ```shell
 cat > tilt-settings.json <<EOF
 {
-  "default_registry": "gcr.io/k8s-staging-cluster-api",
+  "default_registry": "gcr.io/steve-fraser",
   "enable_providers": ["byoh", "kubeadm-bootstrap", "kubeadm-control-plane"],
   "provider_repos": ["../cluster-api-provider-bringyourownhost"]
 }
