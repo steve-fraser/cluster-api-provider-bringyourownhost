@@ -10,6 +10,7 @@ sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 
 echo Download containerd
+rm cri-containerd-cni*
 curl -LOJR https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/cri-containerd-cni-${CONTAINERD_VERSION}-linux-amd64.tar.gz
 
 K8S_MAJOR=$(echo "$KUBERNETES_VERSION" | cut -d '.' -f 1,2)
