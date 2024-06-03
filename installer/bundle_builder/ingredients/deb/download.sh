@@ -27,4 +27,4 @@ echo Update apt package index, install kubelet, kubeadm and kubectl
 sudo apt-get update
 sudo apt-get download {kubelet,kubeadm,kubectl}:$ARCH=$KUBERNETES_VERSION-1.1
 sudo apt-get download kubernetes-cni:$ARCH=1.2.0-2.1
-sudo apt-get download cri-tools:$ARCH=1.27.1-1.1
+sudo apt-get download cri-tools:$ARCH=$KUBERNETES_VERSION-1.1
