@@ -2,7 +2,7 @@
 SHELL:=/usr/bin/env bash
 
 
-RELEASE_VERSIONS?=1.27.14 1.28.10 1.29.5
+RELEASE_VERSIONS?=1.27.14 1.28.10 1.29.5 1.30.4
 
 # Define registries
 STAGING_REGISTRY ?= ghcr.io/steve-fraser
