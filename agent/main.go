@@ -186,20 +186,18 @@ func main() {
 	}
 
 	mgr, err := ctrl.NewManager(config, ctrl.Options{
-		Scheme:    scheme,
-		Namespace: namespace,
+		Scheme: scheme,
 		// this enables filtered watch of ByoHost based on the host name
 		// only ByoHost running for this host will be cached
-		NewCache: cache.BuilderWithOptions(cache.Options{
-			SelectorsByObject: cache.SelectorsByObject{
-				&infrastructurev1beta1.ByoHost{}: {
-					Field: fields.SelectorFromSet(fields.Set{"metadata.name": hostName}),
-				},
-			},
+		NewCache: func(config *rest.Config, opts cache.Options) (cache.Cache, error) {
+			opts.DefaultFieldSelector = fields.SelectorFromSet(fields.Set{"metadata.name": hostName})
+			opts.DefaultNamespaces = map[string]cache.Config{
+				namespace: {},
+			}
+			return cache.New(config, opts)
 		},
-		),
-		MetricsBindAddress: metricsbindaddress,
 	})
+
 	if err != nil {
 		logger.Error(err, "unable to start manager")
 		return
