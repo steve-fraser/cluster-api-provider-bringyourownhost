@@ -143,7 +143,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	mgr.GetWebhookServer().Register("/validate-infrastructure-cluster-x-k8s-io-v1beta1-byohost", &webhook.Admission{Handler: &infrastructurev1beta1.ByoHostValidator{}})
+	mgr.GetWebhookServer().Register("/validate-infrastructure-cluster-x-k8s-io-v1beta1-byohost", &webhook.Admission{Handler: &infrastructurev1beta1.ByoHostValidator{}, decoder: admission.NewDecoder(mgr.GetScheme())})
 
 	if err = (&byohcontrollers.BootstrapKubeconfigReconciler{
 		Client: mgr.GetClient(),
