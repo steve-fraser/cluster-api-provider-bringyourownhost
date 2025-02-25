@@ -230,7 +230,7 @@ host-agent-binary: $(RELEASE_DIR)
 		-e CGO_ENABLED=0 \
 		-e GOOS=$(GOOS) \
 		-e GOARCH=$(GOARCH) \
-		-v "/mnt/user/codespace/steve-fraser/cluster-api-provider-bringyourownhost:/workspace$(DOCKER_VOL_OPTS)" \
+		-v "$$(pwd):/workspace$(DOCKER_VOL_OPTS)" \
 		-w /workspace \
 		golang:1.23.6 \
 		go build -buildvcs=false -a -ldflags "$(GOLDFLAGS)" \
