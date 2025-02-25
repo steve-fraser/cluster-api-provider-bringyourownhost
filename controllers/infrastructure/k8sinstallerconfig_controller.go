@@ -170,7 +170,7 @@ func (r *K8sInstallerConfigReconciler) storeInstallationData(ctx context.Context
 
 	secret := &corev1.Secret{
 		ObjectMeta: metav1.ObjectMeta{
-			Name:      scope.Config.Name,
+			Name:      scope.Config.Name + "-install",
 			Namespace: scope.Config.Namespace,
 			Labels: map[string]string{
 				clusterv1.ClusterNameLabel: scope.Cluster.Name,
