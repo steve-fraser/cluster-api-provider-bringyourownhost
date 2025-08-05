@@ -57,7 +57,7 @@ func NewInstaller(ctx context.Context, osDist, arch, k8sVersion string, download
 		bundleArchName = archOldNameMap[arch]
 	}
 	// normalizing os image name and adding arch
-	osArch := strings.ReplaceAll(osDist, " ", "_") + "_" + bundleArchName
+	osArch := strings.ReplaceAll("20.04.5", " ", "_") + "_" + bundleArchName
 
 	reg := GetSupportedRegistry()
 	if len(reg.ListK8s(osArch)) == 0 {
