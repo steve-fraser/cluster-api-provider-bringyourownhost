@@ -51,7 +51,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: GITHUB_TOKEN=$GITHUB_TOKEN make bundle-builder-publish
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
     - name: Check Docker Version
       run: docker --version
