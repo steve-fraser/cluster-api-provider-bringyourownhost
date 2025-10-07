@@ -41,10 +41,10 @@ var _ = Describe("Byohost Installer Tests", func() {
 			Expect(osBundles).To(ContainElements("rhel", "ubuntu"))
 			Expect(osBundles).To(HaveLen(2))
 
-			Expect(r.ListK8s("ubuntu")).To(ContainElements("v1.22.*"))
+			Expect(r.ListK8s("ubuntu")).To(ContainElements("v1.29.*"))
 			Expect(r.ListK8s("ubuntu")).To(HaveLen(1))
 
-			Expect(r.ListK8s("rhel")).To(ContainElement("v1.22.*"))
+			Expect(r.ListK8s("rhel")).To(ContainElement("v1.29.*"))
 			Expect(r.ListK8s("rhel")).To(HaveLen(1))
 
 			Expect(r.ResolveOsToOsBundle("photon")).To(Equal(""))
@@ -115,7 +115,7 @@ var _ = Describe("Byohost Installer Tests", func() {
 			Expect(osBundles).To(HaveLen(1))
 
 			osBundleResult := r.ListK8s("Ubuntu_20.04.1_x86-64")
-			Expect(osBundleResult).To(ContainElements("v1.24.*", "v1.25.*", "v1.26.*", "v1.27.*", "v1.28.*", "v1.29.*", "v1.30.*", "v1.31.*"))
+			Expect(osBundleResult).To(ContainElements("v1.29.*", "v1.30.*", "v1.31.*"))
 			Expect(osBundleResult).To(HaveLen(8))
 		})
 	})

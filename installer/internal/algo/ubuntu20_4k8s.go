@@ -121,6 +121,9 @@ done
 ## intalling containerd
 tar -C / -xvf "$BUNDLE_PATH/containerd.tar"
 
+mkdir -p /etc/containerd && containerd config default > /etc/containerd/config.toml
+sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+
 ## starting containerd service
 systemctl daemon-reload && systemctl enable containerd && systemctl start containerd`
 
