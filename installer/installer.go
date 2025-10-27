@@ -57,7 +57,12 @@ func NewInstaller(ctx context.Context, osDist, arch, k8sVersion string, download
 		bundleArchName = archOldNameMap[arch]
 	}
 	// normalizing os image name and adding arch
-	osArch := strings.ReplaceAll("Ubuntu 20.04.5", " ", "_") + "_" + bundleArchName
+	osArch := ""
+	if strings.Contains(osDist, "Ubuntu") {
+		osArch = strings.ReplaceAll("Ubuntu 20.04.5", " ", "_") + "_" + bundleArchName
+	} else {
+		osArch = strings.ReplaceAll(osArch, " ", "_") + "_" + bundleArchName
+	}
 
 	reg := GetSupportedRegistry()
 	if len(reg.ListK8s(osArch)) == 0 {
