@@ -18,7 +18,7 @@ import (
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 	"sigs.k8s.io/controller-runtime/pkg/webhook/admission"
-)xa
+)
 
 // log is for logging in this package.
 var bootstrapkubeconfiglog = logf.Log.WithName("bootstrapkubeconfig-resource")
