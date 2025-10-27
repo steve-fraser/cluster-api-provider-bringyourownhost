@@ -128,7 +128,7 @@ func GetSupportedRegistry() registry {
 		reg.AddK8sFilter("v1.29.*")
 		reg.AddK8sFilter("v1.30.*")
 		reg.AddK8sFilter("v1.31.*")
-		reg.AddK8sFilter("v1.32.:*")
+		reg.AddK8sFilter("v1.32.*")
 
 		// Match concrete os version to repository os version
 		reg.AddOsFilter("Ubuntu_20.04.*_x86-64", linuxDistro)
