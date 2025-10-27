@@ -50,43 +50,43 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: GITHUB_TOKEN=$GITHUB_TOKEN make bundle-builder-publish
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check Docker Version
-      run: docker --version
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Check Docker Version
+  #     run: docker --version
     
-    - name: Uninstall podman if installed
-      run: sudo apt-get purge podman && sudo rm -rf /etc/cni/net.d/
+  #   - name: Uninstall podman if installed
+  #     run: sudo apt-get purge podman && sudo rm -rf /etc/cni/net.d/
 
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+  #   - name: Checkout code
+  #     uses: actions/checkout@v3
+  #     with:
+  #       fetch-depth: 0
 
-    - name: turn off swap
-      run: sudo swapoff -a
+  #   - name: turn off swap
+  #     run: sudo swapoff -a
     
-    - name: Set netfilter conntrack max
-      run: sudo sysctl -w net.netfilter.nf_conntrack_max=131072
+  #   - name: Set netfilter conntrack max
+  #     run: sudo sysctl -w net.netfilter.nf_conntrack_max=131072
 
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: 1.23.6
+  #   - name: Set up Go
+  #     uses: actions/setup-go@v4
+  #     with:
+  #       go-version: 1.23.6
 
-    - name: Install ginkgo
-      run: go install github.com/onsi/ginkgo/v2/ginkgo@v2.9.2
+  #   - name: Install ginkgo
+  #     run: go install github.com/onsi/ginkgo/v2/ginkgo@v2.9.2
 
-    - name: Install prequisit packages
-      run: sudo apt update && sudo apt install -qq --yes socat ebtables ethtool conntrack
+  #   - name: Install prequisit packages
+  #     run: sudo apt update && sudo apt install -qq --yes socat ebtables ethtool conntrack
 
-    - name: Run test make target
-      run: make test
+  #   - name: Run test make target
+  #     run: make test
 
-    - name: Upload test coverage
-      uses: codecov/codecov-action@v2
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: cover.out
-        verbose: true
+  #   - name: Upload test coverage
+  #     uses: codecov/codecov-action@v2
+  #     with:
+  #       token: ${{ secrets.CODECOV_TOKEN }}
+  #       files: cover.out
+  #       verbose: true

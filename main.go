@@ -27,6 +27,8 @@ import (
 
 	infrastructurev1beta1 "github.com/vmware-tanzu/cluster-api-provider-bringyourownhost/apis/infrastructure/v1beta1"
 
+	webhookByoh "github.com/vmware-tanzu/cluster-api-provider-bringyourownhost/internal/webhook"
+
 	//+kubebuilder:scaffold:imports
 	clusterv1 "sigs.k8s.io/cluster-api/api/v1beta1"
 	"sigs.k8s.io/cluster-api/controllers/remote"
@@ -158,7 +160,7 @@ func main() {
 		setupLog.Error(err, "unable to create controller", "controller", "BootstrapKubeconfig")
 		os.Exit(1)
 	}
-	if err = (&infrastructurev1beta1.BootstrapKubeconfig{}).SetupWebhookWithManager(mgr); err != nil {
+	if err = (&webhookByoh.BootstrapKubeconfig{}).SetupWebhookWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create webhook", "webhook", "BootstrapKubeconfig")
 		os.Exit(1)
 	}
