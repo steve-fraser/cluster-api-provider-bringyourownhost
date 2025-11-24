@@ -44,7 +44,7 @@ __BYOH__ is a Cluster API Infrastructure Provider for already-provisioned hosts 
 
 - Native Kubernetes manifests and API
 - Support for single and multi-node control plane clusters
-- Support already provisioned Linux VMs with Ubuntu 20.04
+- Support already provisioned Linux VMs with Ubuntu
 
 ## Getting Started
 Check out the [getting_started](https://github.com/vmware-tanzu/cluster-api-provider-bringyourownhost/blob/main/docs/getting_started.md) guide for launching a BYOH workload cluster
